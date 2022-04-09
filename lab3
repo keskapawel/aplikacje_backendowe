@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Group("Ala ma kota Bob i i aa a");
+        }
+
+        public static void Group(string text)
+        {
+            string[] words = text.Split(" ");
+            Dictionary<int, List<string>> dictionairy = new Dictionary<int, List<string>>();
+
+           
+
+             foreach (string word in words)
+             {
+                 int key = word.Length;
+                 if (dictionairy.ContainsKey(key))
+                 {
+                     List<string> list = dictionairy[key];
+                     list.Add(word);
+                 }
+                 else
+                 {
+                     List<string> list = new List<string>();
+                     list.Add(word);
+                     dictionairy.Add(key, list);
+                 }
+             }
+
+            words.GroupBy(x => x.Length).ToList().ForEach(x => {
+                Console.WriteLine(x.Key);
+                x.ToList().ForEach(w => Console.WriteLine(w));
+
+            });
+
+
+            /*
+            foreach (KeyValuePair<int, List<string>> item in dictionairy)
+            {
+                Console.WriteLine(item.Key);
+                foreach (string word in item.Value)
+                {
+                    Console.WriteLine(word);
+                }
+            }
+
+            Console.WriteLine("----");
+            Console.WriteLine("----");
+            foreach (string word in words)
+            {
+                Console.WriteLine(word.ToUpper());
+            }
+            Console.WriteLine("----");
+            Console.WriteLine("----");
+
+            words.Select(x => x.ToUpper()).ToList().ForEach(x => Console.WriteLine(x));
+
+            int[] intTable = { 3, 54, 6, 7, 12, 31, 5, 64, 1 };
+
+            intTable.Select(x => x * 2).ToList().ForEach(x => Console.WriteLine(x));
+
+            */
+
+
+        }
+    }
+}
